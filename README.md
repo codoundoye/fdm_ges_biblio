@@ -26,23 +26,21 @@ Mini-projet réalisé dans le cadre du module **JavaScript avancé (DOM, Fetch A
 
 ## Technologies
 
-| Couche | Technologie |
-|---|---|
-| Structure | HTML5 |
-| Présentation | CSS3 (Flexbox, Grid, media queries) |
-| Comportement | JavaScript ES6+ (Fetch API, async/await) |
-| Données | json-server (API REST simulée) |
-| Polices | Lora et Work Sans (Google Fonts) |
+Structure  HTML5 
+Présentation CSS3 (Flexbox, Grid, media queries) 
+Comportement  JavaScript  (Fetch API, async/await) 
+Données  json-server (API REST simulée) 
+Polices  Lora et Work Sans (Google Fonts) 
 
 ---
 
 ## Installation
 
-**Prérequis :** [Node.js](https://nodejs.org) (version 18 ou supérieure).
+**Prérequis :** Node.js
 
 ```bash
 # 1. Cloner le dépôt
-git clone https://github.com/VOTRE-PSEUDO/fdm_ges_biblio.git
+git clone https://github.com/codoundoye/fdm_ges_biblio.git
 cd fdm_ges_biblio
 
 # 2. Installer json-server
@@ -78,12 +76,11 @@ fdm_ges_biblio/
 
 json-server transforme `db.json` en API REST complète :
 
-| Action | Méthode | Route |
-|---|---|---|
-| Lister les livres | `GET` | `/livres` |
-| Ajouter un livre | `POST` | `/livres` |
-| Modifier la disponibilité | `PATCH` | `/livres/:id` |
-| Supprimer un livre | `DELETE` | `/livres/:id` |
+  
+Lister les livres  `GET`  `/livres` 
+Ajouter un livre  `POST`  `/livres` 
+Modifier la disponibilité  `PATCH` `/livres/:id` 
+Supprimer un livre  `DELETE`  `/livres/:id` 
 
 ### Modèle de données
 
