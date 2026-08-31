@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Bibliothèque Manager</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app" id="app">
+
+    <!-- ===== Menu de gauche ===== -->
+    <aside class="sidebar">
+
+      <button class="menu-btn" id="menuBtn" title="Réduire le menu">
+        <svg viewBox="0 0 20 20">
+          <path d="M3 5h14M3 10h14M3 15h14" />
+        </svg>
+      </button>
+
+      
+      <h1 class="brand-title">Bibliothèque Manager</h1>
+
+      <button class="btn-add" id="addBtn" title="Ajouter un livre">
+        <span class="btn-add-plus">+</span>
+        <span class="btn-add-label">Ajouter un livre</span>
+      </button>
+
+      <p class="nav-title">Statut</p>
+      <div id="statusNav">
+        <button class="nav-item actif" data-filtre="statut" data-valeur="all" title="Tous">
+          <span class="nav-dot dot-tous"></span>
+          <span class="nav-label">Tous</span>
+          <span class="nav-count"></span>
+        </button>
+        <button class="nav-item" data-filtre="statut" data-valeur="dispo" title="Disponibles">
+          <span class="nav-dot dot-dispo"></span>
+          <span class="nav-label">Disponibles</span>
+          <span class="nav-count"></span>
+        </button>
+        <button class="nav-item" data-filtre="statut" data-valeur="emprunte" title="Empruntés">
+          <span class="nav-dot dot-emprunte"></span>
+          <span class="nav-label">Empruntés</span>
+          <span class="nav-count"></span>
+        </button>
+      </div>
+
+      <p class="nav-title">Catégories</p>
+      <div id="categoryNav">
+        <!-- les catégories sont ajoutées ici par JavaScript -->
+      </div>
+
+    </aside>
+
+    <!-- ===== Zone principale ===== -->
+    <main class="main">
+
+      <div class="top-bar">
+        <h2 id="viewTitle">Tous les livres</h2>
+
+        <div class="top-tools">
+          <input
+            type="search"
+            id="search"
+            class="search-input"
+            placeholder="Rechercher un titre, un auteur…"
+          />
+          <button class="btn btn-brown" id="reloadBtn">Actualiser</button>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat-card">
+          <span>Total</span>
+          <strong id="sTotal">0</strong>
+        </div>
+        <div class="stat-card">
+          <span>Disponibles</span>
+          <strong id="sAvailable">0</strong>
+        </div>
+        <div class="stat-card">
+          <span>Empruntés</span>
+          <strong id="sBorrowed">0</strong>
+        </div>
+        <div class="stat-card">
+          <span>Catégories</span>
+          <strong id="sCategories">0</strong>
+        </div>
+      </div>
+
+      <div class="book-grid" id="bookList">
+        <!-- les livres sont affichés ici par JavaScript -->
+      </div>
+
+    </main>
+
+  </div>
+
+  
+  <div class="modal-overlay" id="overlay">
+    <div class="modal">
+
+      <div class="modal-header">
+        <h2>Ajouter un livre</h2>
+        <button class="modal-close" id="closeBtn">&times;</button>
+      </div>
+
+      <form id="bookForm">
+        <label for="titre">Titre du livre</label>
+        <input type="text" id="titre" placeholder="Ex : Le Comte de Monte-Cristo" required />
+
+        <label for="auteur">Auteur</label>
+        <input type="text" id="auteur" placeholder="Ex : Alexandre Dumas" required />
+
+        <label for="categorie">Catégorie</label>
+        <select id="categorie" required></select>
+
+        <label for="image">Couverture <em>(URL, facultatif)</em></label>
+        <input type="url" id="image" placeholder="https://…/couverture.jpg" />
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-gris" id="cancelBtn">Annuler</button>
+          <button type="submit" class="btn btn-primary">Ajouter</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

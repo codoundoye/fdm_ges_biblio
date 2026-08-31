@@ -1,0 +1,18 @@
+# Dépendances npm (réinstallables avec "npm install")
+node_modules/
+
+# Logs
+npm-debug.log*
+*.log
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dossiers d'éditeurs
+.vscode/
+.idea/
+
+# Variables d'environnement
+.env

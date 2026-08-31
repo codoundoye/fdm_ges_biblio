@@ -1,0 +1,682 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #faf6f4;
+  color: #2c2024;
+  font-family: "Work Sans", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  height: 100vh;
+  overflow: hidden;
+}
+
+h1, h2, h3 {
+  font-family: "Lora", Georgia, serif;
+  font-weight: 600;
+}
+
+button, input, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+
+/* ===== Structure générale ===== */
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  flex-shrink: 0;
+  height: 100vh;
+  padding: 22px 18px;
+  background: #3d1b22;
+  color: #faf6f4;
+  overflow-y: auto;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  height: 100vh;
+  padding: 28px 40px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* ===== Barres de défilement ===== */
+
+.sidebar::-webkit-scrollbar,
+.book-grid::-webkit-scrollbar {
+  width: 9px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(250, 246, 244, 0.28);
+  border-radius: 20px;
+}
+
+.book-grid::-webkit-scrollbar-thumb {
+  background: #d6ccd0;
+  border-radius: 20px;
+}
+
+.book-grid::-webkit-scrollbar-thumb:hover {
+  background: #763948;
+}
+
+
+/* ===== Menu de gauche ===== */
+
+.menu-btn {
+  display: block;
+  margin-bottom: 14px;
+  padding: 6px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: rgba(250, 246, 244, 0.75);
+  cursor: pointer;
+}
+
+.menu-btn:hover {
+  background: rgba(250, 246, 244, 0.1);
+  color: #faf6f4;
+}
+
+.menu-btn svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+
+
+.brand-title {
+  margin-bottom: 18px;
+  font-size: 21px;
+  line-height: 1.25;
+}
+
+.btn-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 11px;
+  border: none;
+  border-radius: 6px;
+  background: #faf6f4;
+  color: #3d1b22;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-add:hover {
+  background: #d6ccd0;
+}
+
+.btn-add-plus {
+  font-size: 16px;
+}
+
+.nav-title {
+  margin: 22px 0 7px;
+  padding: 0 11px;
+  color: rgba(250, 246, 244, 0.42);
+  font-size: 10.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 8px 11px;
+  margin-bottom: 1px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: rgba(250, 246, 244, 0.72);
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background: rgba(250, 246, 244, 0.07);
+}
+
+.nav-item.actif {
+  background: rgba(250, 246, 244, 0.14);
+  color: #faf6f4;
+  font-weight: 600;
+}
+
+.nav-dot {
+  flex-shrink: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.nav-label {
+  flex: 1;
+}
+
+.nav-count {
+  font-size: 12px;
+  opacity: 0.55;
+}
+
+/* couleurs des pastilles du menu */
+.dot-tous { background: #d6ccd0; }
+.dot-dispo { background: #8ea87a; }
+.dot-emprunte { background: #c78a6e; }
+.dot-toutes { background: rgba(250, 246, 244, 0.35); }
+.dot-roman { background: #d9899b; }
+.dot-informatique { background: #8ea87a; }
+.dot-histoire { background: #d4a45e; }
+.dot-sciences { background: #8899bb; }
+.dot-bd { background: #ac8ab5; }
+
+
+/* ===== Menu réduit (clic sur le bouton du haut) ===== */
+
+.app.reduit .sidebar {
+  width: 62px;
+  padding-left: 11px;
+  padding-right: 11px;
+}
+
+
+.app.reduit .brand-title,
+.app.reduit .nav-title,
+.app.reduit .nav-label,
+.app.reduit .nav-count,
+.app.reduit .btn-add-label {
+  display: none;
+}
+
+.app.reduit .nav-item,
+.app.reduit .btn-add {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.app.reduit .nav-dot {
+  width: 11px;
+  height: 11px;
+}
+
+.app.reduit #statusNav {
+  margin-top: 18px;
+}
+
+.app.reduit #categoryNav {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(250, 246, 244, 0.12);
+}
+
+
+/* ===== En-tête de la zone principale ===== */
+
+.top-bar {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.top-bar h2 {
+  font-size: 23px;
+  color: #763948;
+}
+
+.top-tools {
+  display: flex;
+  gap: 10px;
+}
+
+
+/* ===== Champs de formulaire ===== */
+
+input, select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d6ccd0;
+  border-radius: 6px;
+  background: #fffdfc;
+  color: #2c2024;
+  outline: none;
+}
+
+input::placeholder {
+  color: #a99ba0;
+}
+
+input:focus,
+select:focus {
+  border-color: #763948;
+}
+
+.search-input {
+  width: 250px;
+}
+
+
+/* ===== Boutons ===== */
+
+.btn {
+  padding: 9px 15px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #763948;
+  border-color: #763948;
+  color: #faf6f4;
+}
+
+.btn-primary:hover {
+  background: #5c2c38;
+}
+
+.btn-brown {
+  background: none;
+  border-color: #763948;
+  color: #763948;
+}
+
+.btn-brown:hover {
+  background: #763948;
+  color: #faf6f4;
+}
+
+.btn-vert {
+  background: none;
+  border-color: #4a5d3f;
+  color: #4a5d3f;
+}
+
+.btn-vert:hover {
+  background: #4a5d3f;
+  color: #faf6f4;
+}
+
+.btn-orange {
+  background: none;
+  border-color: #8a4a34;
+  color: #8a4a34;
+}
+
+.btn-orange:hover {
+  background: #8a4a34;
+  color: #faf6f4;
+}
+
+.btn-gris {
+  background: none;
+  border-color: #d6ccd0;
+  color: #7a6a6e;
+}
+
+.btn-gris:hover {
+  background: #d6ccd0;
+  color: #2c2024;
+}
+
+
+/* ===== Statistiques ===== */
+
+.stats {
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.stat-card {
+  padding: 14px 18px;
+  background: #fffdfc;
+  border: 1px solid #d6ccd0;
+  border-radius: 8px;
+}
+
+.stat-card span {
+  display: block;
+  color: #7a6a6e;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.stat-card strong {
+  font-family: "Lora", serif;
+  font-size: 23px;
+  color: #763948;
+}
+
+
+/* ===== Grille des livres (seule zone qui défile) ===== */
+
+.book-grid {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  align-content: start;
+  padding: 0 10px 34px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 15px;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 13px;
+  background: #fffdfc;
+  border: 1px solid #d6ccd0;
+  border-radius: 8px;
+}
+
+.cover {
+  position: relative;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.cover-initials {
+  padding: 2px 11px;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  font-family: "Lora", serif;
+  font-size: 25px;
+  letter-spacing: 2px;
+}
+
+/* la photo se pose par-dessus les initiales ;
+   si elle ne charge pas, le JS la retire et les initiales réapparaissent */
+.cover-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 5px;
+}
+
+.book-card h3 {
+  font-size: 15.5px;
+  line-height: 1.3;
+}
+
+.book-author {
+  margin-top: -6px;
+  color: #7a6a6e;
+  font-size: 13px;
+}
+
+.book-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 2px;
+}
+
+.badge {
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+/* couleurs des catégories : utilisées par les badges ET les couvertures */
+.cat-roman { background: #f1e2e5; color: #763948; }
+.cat-informatique { background: #e3e8de; color: #41543a; }
+.cat-histoire { background: #f3e8d6; color: #8a5a22; }
+.cat-sciences { background: #e2e6ec; color: #3e4a63; }
+.cat-bd { background: #eae0ea; color: #5c3a5c; }
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.status-dispo {
+  color: #4a5d3f;
+}
+
+.status-emprunte {
+  color: #8a4a34;
+}
+
+.puce {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.status-dispo .puce {
+  background: #4a5d3f;
+}
+
+.status-emprunte .puce {
+  background: #8a4a34;
+}
+
+.book-actions {
+  display: flex;
+  gap: 7px;
+}
+
+.book-actions .btn {
+  flex: 1;
+  padding: 7px 8px;
+  font-size: 12.5px;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  padding: 40px;
+  text-align: center;
+  color: #7a6a6e;
+  border: 1px dashed #d6ccd0;
+  border-radius: 8px;
+}
+
+
+/* ===== Popup d'ajout ===== */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(44, 32, 36, 0.55);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-overlay.ouvert {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  width: 100%;
+  max-width: 400px;
+  padding: 24px;
+  background: #fffdfc;
+  border-radius: 10px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-header h2 {
+  font-size: 18px;
+}
+
+.modal-close {
+  border: none;
+  background: none;
+  color: #7a6a6e;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.modal label {
+  display: block;
+  margin: 14px 0 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.modal label em {
+  color: #7a6a6e;
+  font-weight: 400;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 9px;
+  margin-top: 20px;
+}
+
+
+/* ===== Message de notification ===== */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 20;
+  padding: 10px 18px;
+  border-radius: 6px;
+  background: #3d1b22;
+  color: #faf6f4;
+  font-size: 13.5px;
+  transform: translateX(-50%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.toast.visible {
+  opacity: 1;
+}
+
+
+/* ===== Petits écrans ===== */
+
+@media (max-width: 880px) {
+  body {
+    height: auto;
+    overflow: auto;
+  }
+
+  .app,
+  .app.reduit {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .sidebar,
+  .app.reduit .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+  }
+
+  .menu-btn {
+    display: none;
+  }
+
+  
+  .app.reduit .brand-title,
+  .app.reduit .nav-title,
+  .app.reduit .nav-label,
+  .app.reduit .nav-count {
+    display: block;
+  }
+
+  #statusNav,
+  #categoryNav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .nav-item {
+    width: auto;
+  }
+
+  .main {
+    height: auto;
+    padding: 24px 20px 40px;
+  }
+
+  .book-grid {
+    overflow: visible;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .top-tools {
+    width: 100%;
+  }
+
+  .search-input {
+    flex: 1;
+    width: auto;
+  }
+}

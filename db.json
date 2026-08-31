@@ -1,0 +1,69 @@
+{
+  "livres": [
+    {
+      "id": "2",
+      "titre": "Clean Code",
+      "auteur": "Robert C. Martin",
+      "categorie": "Informatique",
+      "image": "https://covers.openlibrary.org/b/isbn/9780132350884-L.jpg?default=false",
+      "disponible": false
+    },
+    {
+      "id": "3",
+      "titre": "Sapiens",
+      "auteur": "Yuval Noah Harari",
+      "categorie": "Histoire",
+      "image": "https://covers.openlibrary.org/b/isbn/9780062316097-L.jpg?default=false",
+      "disponible": true
+    },
+    {
+      "id": "5",
+      "titre": "Astérix chez les Belges",
+      "auteur": "Goscinny & Uderzo",
+      "categorie": "Bande dessinée",
+      "image": "https://covers.openlibrary.org/b/isbn/9782012101487-L.jpg?default=false",
+      "disponible": true
+    },
+    {
+      "id": "6",
+      "titre": "1984",
+      "auteur": "George Orwell",
+      "categorie": "Roman",
+      "image": "https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg?default=false",
+      "disponible": false
+    },
+    {
+      "id": "7",
+      "titre": "Le Père Goriot",
+      "auteur": "Honoré de Balzac",
+      "categorie": "Roman",
+      "image": "https://covers.openlibrary.org/b/isbn/9782070413140-L.jpg?default=false",
+      "disponible": true
+    },
+    {
+      "titre": "Le vieux negre et la medaille",
+      "auteur": "Ferdinand Oyono",
+      "categorie": "Roman",
+      "image": "https://m.media-amazon.com/images/I/41MKsTVVAgL._AC_.jpg",
+      "disponible": true,
+      "id": "NotcI6JTZMY"
+    },
+    {
+      "titre": "Les miserables",
+      "auteur": "Victore Hugo",
+      "categorie": "Roman",
+      "image": "https://cdn1.booknode.com/book_cover/1077/full/les-miserables-1077010.jpg",
+      "disponible": true,
+      "id": "asUTFFIJcQg"
+    },
+    {
+      "titre": "Une si longue lettre",
+      "auteur": "Mariama Ba",
+      "categorie": "Roman",
+      "image": "https://m.media-amazon.com/images/I/61Zydbc-gbL._SL1114_.jpg",
+      "disponible": false,
+      "id": "v_AtoqTBsc0"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
